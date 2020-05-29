@@ -1,0 +1,13 @@
+language: minimal
+
+services:
+  - docker
+
+os: linux
+
+script:
+  - docker build -t srowley/file-upload:latest .
+
+after_success:
+  - echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
+  - docker push srowley/file-upload:latest
